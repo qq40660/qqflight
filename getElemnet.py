@@ -40,12 +40,9 @@ getdateElement()
 
 def getKeyWordsPresent():
     driver.find_element_by_xpath("//*[@id='flightListTable']/tbody/tr[1]/td[6]/a/span").click()
-
     #得到下拉报价区的ota数量
     x = len(driver.find_elements(By.XPATH, "//*[@id='flightListTable']/tbody/tr[2]/td/div[1]/div[2]/table/tbody/tr"))
     for i in range(1, x):
         flightListTable = "//*[@id='flightListTable']/tbody/tr[2]/td/div[1]/div[2]/table/tbody/tr[%s]/td[2]"
         keyWords = driver.find_element_by_xpath(flightListTable).text[:4]
-        print keyWords
-
-    pass
+        return keyWords

@@ -1,3 +1,10 @@
 北京到上海 http://go.qq.com/v2/flight/list.html?tripType=0&fromCity=PEK&toCity=SHA&depDate=20131106&qf=go.qq.com%2Fv2%2Fflight%2Flist.html%3FtripType%3D0%26fromCity%3DPEK%26toCity%3DXMN%26depDate%3D20131106%26newWindowToList%3Dtrue
 北京到广州 http://go.qq.com/v2/flight/list.html?tripType=0&fromCity=PEK&toCity=CAN&depDate=20131106&qf=go.qq.com%2Fv2%2Fflight%2Flist.html%3FtripType%3D0%26fromCity%3DPEK%26toCity%3DSHA%26depDate%3D20131106
 上海到广州 http://go.qq.com/v2/flight/list.html?tripType=0&fromCity=SHA&toCity=CAN&depDate=20131106&qf=go.qq.com%2Fv2%2Fflight%2Flist.html%3FtripType%3D0%26fromCity%3DPEK%26toCity%3DCAN%26depDate%3D20131106
+
+邮件
+log
+异常处理
+
+linux 环境处理
+windows 环境处理
