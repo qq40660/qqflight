@@ -12,7 +12,7 @@ date = 'datetime'
 flightNo = 'flightNo'
 
 
-def send_mail(mail_to, from_to, date, flightNo):
+def send_error_mail(mail_to, from_to, date, flightNo):
     smtp = smtplib.SMTP()
     smtp.connect(MAIL_HOST, MAIL_PORT)
     smtp.login(MAIL_USERNAME, MAIL_PASSWORD)

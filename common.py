@@ -1,24 +1,19 @@
 #-*- coding:utf8 -*-
 
-from dataCalculate import *
-"""
-访问的url为head + 日期到计算函数。
-"""
+from config import *
+import time
 
-
-
-bhHead = 'http://go.qq.com/v2/flight/list.html?tripType=0&fromCity=PEK&toCity=SHA&depDate='
-bgHead = 'http://go.qq.com/v2/flight/list.html?tripType=0&fromCity=PEK&toCity=CAN&depDate='
-hgHead = 'http://go.qq.com/v2/flight/list.html?tripType=0&fromCity=SHA&toCity=CAN&depDate='
 
 urlHeadList = [bhHead, bgHead, hgHead]
-urlList = []
-
-for i in urlHeadList:
-    for x in getDataList():
-        urlList.append(i+x)
+urlTmpList = []
+urlDate = time.strftime('%Y%m%d', time.gmtime())
 
 
+def get_url():
+
+    for i in urlHeadList:
+        urlTmpList.append(i+urlDate)
+    return urlTmpList
 
 
 

@@ -44,6 +44,7 @@ def getDataList():
         if enddays == 1:
             tmpdate = str(0) + str(enddays)
             dateListStr = str(yearNext) + str(monthNext) + str(tmpdate)
+            dateList.append(dateListStr)
         else:
             for i in xrange(1, enddays):
                 if i < 10:
