@@ -10,10 +10,11 @@ from selenium.common.exceptions import NoAlertPresentException
 
 driver = webdriver.Firefox()
 
+url = 'http://go.qq.com/v2/flight/list.html?tripType=0&fromCity=PEK&toCity=SHA&depDate=20131104'
 
-def getdateElement():
 
-    driver.get('http://go.qq.com/v2/flight/list.html?tripType=0&fromCity=PEK&toCity=SHA&depDate=20131104')
+def getdateElement(url):
+    driver.get(url)
     for i in range(1, 8):
         dateElemnet = "//*[@class='ticket_main_select']/div[1]/ul[1]/li[%s]/a/strong" % i
         driver.find_element_by_xpath(dateElemnet).click()
