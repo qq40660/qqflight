@@ -27,12 +27,12 @@ html_1 = '''
 </body>
 </html>
 '''
-
+html = html_1 % ('a', 'b', 'c')
 smtp = smtplib.SMTP()
 smtp.connect(MAIL_HOST, MAIL_PORT)
 smtp.login(MAIL_USERNAME, MAIL_PASSWORD)
 
-msg = MIMEText(html_1, 'html', 'utf-8')
+msg = MIMEText(html, 'html', 'utf-8')
 msg['From'] = MAIL_USERNAME
 msg['To'] = '35318718'
 msg['Subject'] = title
