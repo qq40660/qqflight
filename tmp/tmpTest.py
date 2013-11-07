@@ -12,7 +12,7 @@ from common import *
 
 driver = webdriver.Firefox()
 
-url = 'http://go.qq.com/v2/flight/list.html?tripType=0&fromCity=PEK&toCity=SHA&depDate=20131107'
+url = 'http://go.qq.com/v2/flight/list.html?tripType=0&fromCity=PEK&toCity=SHA&depDate=20131108'
 
 driver.get(url)
 destination = driver.find_element_by_xpath("//*[@id='tripWayGo']/h3/a").text[-6:-1]
@@ -26,6 +26,9 @@ startTime = driver.find_element_by_xpath("\
 print "start time is: %s" % startTime[-8:]
 
 driver.find_element_by_xpath("//*[@id='flightListTable']/tbody/tr[1]/td[6]/a/span").click()
+flightNo = driver.find_element_by_xpath("//*[@id='flightListTable']/tbody/tr[1]/td[1]").text
+
+
         #得到下拉报价区的ota数量
 x = len(driver.find_elements(By.XPATH, "//*[@id='flightListTable']/tbody/tr[2]/td/div[1]/div[2]/table/tbody/tr"))
 print x

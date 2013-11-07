@@ -17,17 +17,28 @@ urlList = get_url()
 def getKeyWordsPresent():
     try:
         driver.find_element_by_xpath("//*[@id='flightListTable']/tbody/tr[1]/td[6]/a/span").click()
+        global flightNo
+        flightNo = driver.find_element_by_xpath("//*[@id='flightListTable']/tbody/tr[1]/td[1]").text
+        print flightNo
+        global airlineFlightNo
+        airlineFlightNo = flightNo[:4] + flightNo[5:]
+        print 'Fli'
+        print airlineFlightNo
         #得到下拉报价区的ota数量
+        global otaCount
         otaCount = len(driver.find_elements(By.XPATH, "\
             //*[@id='flightListTable']/tbody/tr[2]/td/div[1]/div[2]/table/tbody/tr"))
+        global keyWordsCount
         keyWordsCount = 0
         for i in range(1, (otaCount + 1)):
             flightListTable = "//*[@id='flightListTable']/tbody/tr[2]/td/div[1]/div[2]/table/tbody/tr[%s]/td[2]" % i
             keyWords = driver.find_element_by_xpath(flightListTable).text[:4]
-            keyWordsCount += 1
-            print keyWords
+            if keyWords == u'酷讯担保':
+                keyWordsCount += 1
+            print keyWords, keyWordsCount
         if keyWordsCount < 2 and otaCount == 3:
             print "Error"
+        #return airlineFlightNo, otaCount, keyWordsCount
     except:
         print u"无法找到"
 
@@ -36,23 +47,26 @@ for url in urlList:
     destination = driver.find_element_by_xpath("//*[@id='tripWayGo']/h3/a").text[-6:-1]
     print destination
     for i in range(1, 8):
-        dateElemnet = "//*[@class='ticket_main_select']/div[1]/ul[1]/li[%s]/a/strong" % i
-        driver.find_element_by_xpath(dateElemnet).click()
+
+        dateElement = "//*[@class='ticket_main_select']/div[1]/ul[1]/li[%s]/a/strong" % i
+        driver.find_element_by_xpath(dateElement).click()
         time.sleep(3)
         print u"日期选择完毕"
         getKeyWordsPresent()
         if i == 7:
             startTime = driver.find_element_by_xpath("\
-                    //*[@class='ticket_main_select']/div[1]/ul[1]/li[4]/a/strong").get_attribute('id')
-            print startTime[-8:]
-
+                    //*[@class='ticket_main_select']/div[1]/ul[1]/li[4]/a/strong").get_attribute('id')[-8:]
+            write_to_log(destination, airlineFlightNo, startTime, otaCount, keyWordsCount)
+            print startTime
         else:
-            startTime = driver.find_element_by_xpath(dateElemnet).get_attribute('id')
-            print startTime[-8:]
+            startTime = driver.find_element_by_xpath(dateElement).get_attribute('id')[-8:]
+            write_to_log(destination, airlineFlightNo, startTime, otaCount, keyWordsCount)
+            print startTime
 
     for i in range(5, 8):
-        dateElemnet = "//*[@class='ticket_main_select']/div[1]/ul[1]/li[%s]/a/strong" % i
-        driver.find_element_by_xpath(dateElemnet).click()
+
+        dateElement = "//*[@class='ticket_main_select']/div[1]/ul[1]/li[%s]/a/strong" % i
+        driver.find_element_by_xpath(dateElement).click()
         time.sleep(3)
         print u"日期选择完毕"
         getKeyWordsPresent()
@@ -60,11 +74,13 @@ for url in urlList:
         print 1
         if i == 7:
             startTime = driver.find_element_by_xpath("\
-                    //*[@class='ticket_main_select']/div[1]/ul[1]/li[4]/a/strong").get_attribute('id')
-            print startTime[-8:]
+                    //*[@class='ticket_main_select']/div[1]/ul[1]/li[4]/a/strong").get_attribute('id')[-8:]
+            write_to_log(destination, airlineFlightNo, startTime, otaCount, keyWordsCount)
+            print startTime
         else:
-            startTime = driver.find_element_by_xpath(dateElemnet).get_attribute('id')
-            print startTime[-8:]
+            startTime = driver.find_element_by_xpath(dateElement).get_attribute('id')[-8:]
+            write_to_log(destination, airlineFlightNo, startTime, otaCount, keyWordsCount)
+            print startTime
 
 end = time.time()
 elapsed = end - start
