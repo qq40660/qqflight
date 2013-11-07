@@ -16,10 +16,12 @@ def get_url():
     return urlTmpList
 
 
-def write_to_log(destination, flightNo, otaCount):
+def write_to_log(destination='Null', flightNo='Null', otaCount='Null', keyWordsPresent='Null'):
+
     fileHandle = open('/root/PycharmProjects/qqflight/log', 'a')
     scriptRunTime = time.strftime('%Y-%m-%d %H-%M')
     stringInput = 'RunTime: %s, Destination: %s, FlightNo: %s, OTAAmount: %s, keyWords:' \
-                  % (scriptRunTime, destination, flightNo, otaCount)
-    file.write(stringInput)
+                  % (scriptRunTime, destination, flightNo, otaCount, keyWordsPresent)
+    fileHandle.write(stringInput)
+    fileHandle.write('\n')
     fileHandle.close()
