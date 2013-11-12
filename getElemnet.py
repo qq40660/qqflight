@@ -3,6 +3,7 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from sendMail import *
 
 from common import *
 
@@ -38,30 +39,38 @@ def getKeyWordsPresent():
             print keyWords, keyWordsCount
         if keyWordsCount < 2 and otaCount == 3:
             print "Error"
+            send_error_mail(MAIL_TO, destination, startTime, flightNo)
         #return airlineFlightNo, otaCount, keyWordsCount
     except:
         print u"无法找到"
+
 
 for url in urlList:
     driver.get(url)
     destination = driver.find_element_by_xpath("//*[@id='tripWayGo']/h3/a").text[-6:-1]
     print destination
-    for i in range(1, 8):
 
+    for i in range(1, 8):
         dateElement = "//*[@class='ticket_main_select']/div[1]/ul[1]/li[%s]/a/strong" % i
         driver.find_element_by_xpath(dateElement).click()
         time.sleep(3)
         print u"日期选择完毕"
         getKeyWordsPresent()
         if i == 7:
-            startTime = driver.find_element_by_xpath("\
-                    //*[@class='ticket_main_select']/div[1]/ul[1]/li[4]/a/strong").get_attribute('id')[-8:]
-            write_to_log(destination, airlineFlightNo, startTime, otaCount, keyWordsCount)
-            print startTime
+            try:
+                startTime = driver.find_element_by_xpath("\
+                        //*[@class='ticket_main_select']/div[1]/ul[1]/li[4]/a/strong").get_attribute('id')[-8:]
+                write_to_log(destination, airlineFlightNo, startTime, otaCount, keyWordsCount)
+                print startTime
+            except:
+                no_flight(destination)
         else:
-            startTime = driver.find_element_by_xpath(dateElement).get_attribute('id')[-8:]
-            write_to_log(destination, airlineFlightNo, startTime, otaCount, keyWordsCount)
-            print startTime
+            try:
+                startTime = driver.find_element_by_xpath(dateElement).get_attribute('id')[-8:]
+                write_to_log(destination, airlineFlightNo, startTime, otaCount, keyWordsCount)
+                print startTime
+            except:
+                no_flight(destination)
 
     for i in range(5, 8):
 
@@ -73,15 +82,20 @@ for url in urlList:
         time.sleep(3)
         print 1
         if i == 7:
-            startTime = driver.find_element_by_xpath("\
-                    //*[@class='ticket_main_select']/div[1]/ul[1]/li[4]/a/strong").get_attribute('id')[-8:]
-            write_to_log(destination, airlineFlightNo, startTime, otaCount, keyWordsCount)
-            print startTime
+            try:
+                startTime = driver.find_element_by_xpath("\
+                        //*[@class='ticket_main_select']/div[1]/ul[1]/li[4]/a/strong").get_attribute('id')[-8:]
+                write_to_log(destination, airlineFlightNo, startTime, otaCount, keyWordsCount)
+                print startTime
+            except:
+                no_flight(destination)
         else:
-            startTime = driver.find_element_by_xpath(dateElement).get_attribute('id')[-8:]
-            write_to_log(destination, airlineFlightNo, startTime, otaCount, keyWordsCount)
-            print startTime
-
+            try:
+                startTime = driver.find_element_by_xpath(dateElement).get_attribute('id')[-8:]
+                write_to_log(destination, airlineFlightNo, startTime, otaCount, keyWordsCount)
+                print startTime
+            except:
+                no_flight(destination)
 end = time.time()
 elapsed = end - start
 print "Time taken: ", elapsed, "seconds."

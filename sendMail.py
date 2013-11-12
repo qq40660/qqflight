@@ -7,6 +7,7 @@ from email.mime.text import MIMEText
 
 from config import *
 
+
 from_to = 'beijing-shanghai'
 date = 'datetime'
 flightNo = 'flightNo'
@@ -21,6 +22,9 @@ def send_error_mail(mail_to, from_to, date, flightNo):
     msg['From'] = MAIL_USERNAME
     msg['To'] = 'mail_to'
     msg['Subject'] = title
-    smtp.sendmail(MAIL_USERNAME, mail_to, msg.as_string())
+    for i in mail_to:
+        print i
+        smtp.sendmail(MAIL_USERNAME, i, msg.as_string())
     smtp.quit()
 
+#send_error_mail(MAIL_TO, from_to, date, flightNo)

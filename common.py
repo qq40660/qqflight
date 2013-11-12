@@ -25,3 +25,13 @@ def write_to_log(destination='Null', flightNo='Null', startTime='Null', otaCount
     fileHandle.write(stringInput.encode('utf-8'))
     fileHandle.write('\n')
     fileHandle.close()
+
+
+def no_flight(destination='Null'):
+
+    fileHandle = open('/root/PycharmProjects/qqflight/log/log', 'a')
+    scriptRunTime = time.strftime('%Y-%m-%d %H-%M')
+    stringInput = 'RunTime: %s, Destination: %s. No flight in this time' % (scriptRunTime, destination)
+    fileHandle.write(stringInput.encode('utf-8'))
+    fileHandle.write('\n')
+    fileHandle.close()
