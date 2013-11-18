@@ -16,7 +16,7 @@ MAIL_TO = ['35318717@qq.com', '304858826@qq.com']
 title = 'QQ Flight Auto_test Error or Warring Report'
 
 
-html_1 = '''
+html_1 = """
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,4 +35,4 @@ html_1 = '''
 </div>
 </body>
 </html>
-'''
+"""
